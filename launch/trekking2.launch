@@ -1,0 +1,20 @@
+<launch>
+
+	<master auto="start" />
+
+	<include file="$(find trekking_description)/launch/display.launch" />
+
+    <node name="xdk110_node" pkg="xdk110_ros" type="node.py">
+    </node> 
+
+    <!-- <node name="gps_receive" pkg="gps_trekking" type="receive.py">
+    </node> -->
+
+    <node name="nmea_serial_driver" pkg="nmea_navsat_driver" type="nmea_serial_driver">
+        <param name="baud" value="115200" />
+        <param name="frame_id" value="gps_link" />
+    </node>
+
+    <include file="$(find trekking_localization)/launch/kalman_filter2.launch" />
+
+</launch>
